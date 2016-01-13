@@ -14,6 +14,8 @@ This searches all the logs in `log_directory` (default: `logs`) for requests wit
 
     domain, count
 
+This uses https://github.com/kellydunn/golang-geo to compute great circle distances.
+
 ## Generate Test Data
 
     ./simple-log-search [log_directory] --generate
