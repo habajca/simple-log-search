@@ -16,7 +16,7 @@ This searches all the logs in `log_directory` (default: `logs`) with possible op
     
 Defining the origin of the search in the time dimension as a unix timestamp (in seconds). Defaults to current time.
     
-    -f, --timeframe <seconds>
+    -m, --timeframe <seconds>
     
 Defining the search space in the time dimension in seconds. Defaults to 3600 seconds (1 hour).
     
