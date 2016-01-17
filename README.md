@@ -12,19 +12,19 @@ A simple search of simple pixel server logs. Searches many simple pixel log file
 
 This searches all the logs in `log_directory` (default: `logs`) with possible options:
     
-    -t, --time <unix timestamp>
+    -t, --search-time <unix timestamp>
     
 Defining the origin of the search in the time dimension as a unix timestamp (in seconds). Defaults to current time.
     
-    -m, --timeframe <seconds>
+    -m, --search-timeframe <seconds>
     
 Defining the search space in the time dimension in seconds. Defaults to 3600 seconds (1 hour).
     
-    -g, --geo <latitude,longitude>
+    -g, --search-geo <latitude,longitude>
     
 Defining the origin of the search in the geo dimensions as a latitude, longitude tuple. Defaults to `37.7576171,-122.5776844` (San Francisco, CA).
     
-    -d, --distance <meters>
+    -d, --search-distance <meters>
     
 Defining the search space in the geo dimensions. Defaults to 5000 meters.
 
@@ -40,10 +40,10 @@ This uses https://github.com/kellydunn/golang-geo to compute great circle distan
 
 This generates multiple test log files in `log_directory` (default: `logs`) using the domains defined in `domains_file` with possible options:
 
-    -f, --files <number of files>
+    -f, --generation-files <number of files>
 
 Defining the number of test files to create. Defaults to 1000 files.
 
-    -r, --rows <number of rows>
+    -r, --generation-rows <number of rows>
     
 Defining the number of rows per test file. Defaults to 1000 rows.
