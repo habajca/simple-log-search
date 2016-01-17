@@ -22,7 +22,7 @@ Defining the search space in the time dimension in seconds. Defaults to 3600 sec
     
     -g, --geo <latitude,longitude>
     
-Defining the origin of the search in the geo dimensions as a latitude, longitude tuple. Defaults to 37.7576171,-122.5776844,11 (San Francisco, CA).
+Defining the origin of the search in the geo dimensions as a latitude, longitude tuple. Defaults to `37.7576171,-122.5776844` (San Francisco, CA).
     
     -d, --distance <meters>
     
