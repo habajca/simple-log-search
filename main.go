@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/habajca/simple-log-search/data"
 	flag "github.com/ogier/pflag"
 	"os"
 	"strconv"
@@ -28,10 +29,7 @@ func init() {
 	flag.IntVarP(&timeFrame, "search-timeframe", "m", 3600, "The search space in the time dimension in seconds. (search only)")
 }
 
-type geoPoint struct {
-	latitude  float64
-	longitude float64
-}
+type geoPoint data.GeoPoint
 
 const defaultGeoPointString = "37.7576171,-122.5776844"
 
@@ -54,8 +52,8 @@ func (geo *geoPoint) Set(value string) error {
 		return lonErr
 	}
 
-	geo.latitude = latitude
-	geo.longitude = longitude
+	geo.Latitude = latitude
+	geo.Longitude = longitude
 	return nil
 }
 

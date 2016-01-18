@@ -14,8 +14,8 @@ func TestGeoSet(t *testing.T) {
 	assert.Equal(
 		t,
 		geoPoint{
-			latitude:  37.7576171,
-			longitude: -122.5776844,
+			Latitude:  37.7576171,
+			Longitude: -122.5776844,
 		},
 		testGeo,
 	)

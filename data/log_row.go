@@ -8,8 +8,7 @@ type LogRow struct {
 	Timestamp int64
 	Uid       string
 	Domain    string
-	Latitude  float64
-	Longitude float64
+	Geo       GeoPoint
 }
 
 func (r LogRow) String() (string, error) {

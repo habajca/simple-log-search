@@ -12,8 +12,10 @@ func TestLogRowToStringRoundTrip(t *testing.T) {
 		Timestamp: time.Now().Unix(),
 		Uid:       "uid",
 		Domain:    "test.com",
-		Latitude:  37.7576171,
-		Longitude: -122.5776844,
+		Geo: GeoPoint{
+			Latitude:  37.7576171,
+			Longitude: -122.5776844,
+		},
 	}
 	rowAsString, err := originalRow.String()
 	if !assert.Nil(t, err) {
