@@ -84,6 +84,12 @@ func init() {
 	flag.IntVarP(&rowCount, "generation-rows", "r", 1000, "The number of rows per test file. (generation only)")
 }
 
+var uidCount int
+
+func init() {
+	flag.IntVarP(&uidCount, "generation-uids", "u", 1000, "The number of uids in all test files.")
+}
+
 func init() {
 	flag.Usage = func() {
 		fmt.Fprintf(
@@ -103,5 +109,5 @@ with options:
 
 func main() {
 	flag.Parse()
-	fmt.Println(generateTestFiles, timeOrigin, timeFrame, geo, distance, fileCount, rowCount)
+	fmt.Println(generateTestFiles, timeOrigin, timeFrame, geo, distance, fileCount, rowCount, uidCount)
 }
