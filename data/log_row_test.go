@@ -16,11 +16,13 @@ func TestLogRowToStringRoundTrip(t *testing.T) {
 		Longitude: -122.5776844,
 	}
 	rowAsString, err := originalRow.String()
-	if assert.Nil(t, err) {
-		endRow := LogRow{}
-		err = (&endRow).FromString(rowAsString)
-		if assert.Nil(t, err) {
-			assert.Equal(t, originalRow, endRow)
-		}
+	if !assert.Nil(t, err) {
+		t.FailNow()
 	}
+	endRow := LogRow{}
+	err = (&endRow).FromString(rowAsString)
+	if !assert.Nil(t, err) {
+		t.FailNow()
+	}
+	assert.Equal(t, originalRow, endRow)
 }
