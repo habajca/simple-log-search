@@ -106,8 +106,41 @@ with options:
 	}
 }
 
+func positive(i int64) bool {
+	if i < 0 {
+		flag.Usage()
+		return false
+	}
+	return true
+}
+
+func valid() bool {
+	for _, i := range []int{fileCount, rowCount, timeFrame, uidCount, distance} {
+		fmt.Println(i)
+		if !positive(int64(i)) {
+			return false
+		}
+	}
+	if !positive(timeOrigin) {
+		return false
+	}
+	if geo.Latitude > 90 || geo.Latitude < -90 {
+		return false
+	}
+	if geo.Longitude > 180 || geo.Longitude < -180 {
+		return false
+	}
+
+	return true
+}
+
 func main() {
 	flag.Parse()
+	if !valid() {
+		flag.Usage()
+		os.Exit(1)
+	}
+
 	if len(os.Args) < 2 {
 		flag.Usage()
 		os.Exit(1)
