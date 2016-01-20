@@ -6,44 +6,19 @@ A simple search of simple pixel server logs. Searches many simple pixel log file
     go get
     go build
 
-## Search
+## Usage
 
-    ./simple-log-search [log_directory] [options]
-
-This searches all the logs in `log_directory` (default: `logs`) with possible options:
-    
-    -t, --search-time <unix timestamp>
-    
-Defining the origin of the search in the time dimension as a unix timestamp (in seconds). Defaults to current time.
-    
-    -m, --search-timeframe <seconds>
-    
-Defining the search space in the time dimension in seconds. Defaults to 3600 seconds (1 hour).
-    
-    -g, --search-geo <latitude,longitude>
-    
-Defining the origin of the search in the geo dimensions as a latitude, longitude tuple. Defaults to `37.7576171,-122.5776844` (San Francisco, CA).
-    
-    -d, --search-distance <meters>
-    
-Defining the search space in the geo dimensions. Defaults to 5000 meters.
-
-Output is in the follow format:
-
-    domain, count
-
-This uses https://github.com/kellydunn/golang-geo to compute great circle distances.
-
-## Generate Test Data
-
-    ./simple-log-search [log_directory] [domains_file] --generate [options]
-
-This generates multiple test log files in `log_directory` (default: `logs`) using the domains defined in `domains_file` with possible options:
-
-    -f, --generation-files <number of files>
-
-Defining the number of test files to create. Defaults to 1000 files.
-
-    -r, --generation-rows <number of rows>
-    
-Defining the number of rows per test file. Defaults to 1000 rows.
+        > ./simple-log-search -h
+        Usage:
+        ./simple-log-search log_directory [options]
+        or
+        ./simple-log-search log_directory domains_file --generate [options]
+        with options:
+        -d, --distance=5000: The search space in the geo dimensions (in meters).
+            --generate=false: Indicates that test files should be generated.
+        -f, --generation-files=1000: The number of test files to create. (generation only)
+        -r, --generation-rows=1000: The number of rows per test file. (generation only)
+        -u, --generation-uids=1000: The number of uids in all test files. (generation only)
+        -g, --geo=37.7576171,-122.5776844: The origin of the search in the geo dimensions as a latitude, longitude tuple.
+        -t, --time=1453286759: The origin of the search in the time dimension as a unix timestamp (in seconds). (defaults to now)
+        -m, --timeframe=3600: The search space in the time dimension in seconds.
