@@ -1,4 +1,4 @@
-package data
+package util
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -17,14 +17,8 @@ func TestLogRowToStringRoundTrip(t *testing.T) {
 			Longitude: -122.5776844,
 		},
 	}
-	rowAsString, err := originalRow.String()
-	if !assert.Nil(t, err) {
-		t.FailNow()
-	}
+	rowAsString := StructToString(originalRow)
 	endRow := LogRow{}
-	err = (&endRow).FromString(rowAsString)
-	if !assert.Nil(t, err) {
-		t.FailNow()
-	}
+	StructFromString(rowAsString, &endRow)
 	assert.Equal(t, originalRow, endRow)
 }

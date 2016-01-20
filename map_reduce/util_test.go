@@ -1,22 +1,15 @@
 package map_reduce
 
 import (
+	"github.com/habajca/simple-log-search/util"
 	"github.com/stretchr/testify/assert"
 	"strconv"
 	"testing"
 )
 
-func panicAtoi(s string) int {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		panic(err)
-	}
-	return i
-}
-
 func TestMap(t *testing.T) {
 	filterNegative := func(s string) (string, bool) {
-		i := panicAtoi(s)
+		i := util.Atoi(s)
 		if i < 0 {
 			return "", false
 		}
@@ -31,7 +24,7 @@ func TestMap(t *testing.T) {
 
 func TestReduce(t *testing.T) {
 	oddOrEven := func(s string) string {
-		i := panicAtoi(s)
+		i := util.Atoi(s)
 		if i%2 == 0 {
 			return "even"
 		}
@@ -52,8 +45,8 @@ func TestReduce(t *testing.T) {
 		if len(acc) == 0 {
 			return []string{s}
 		}
-		i := panicAtoi(s)
-		sum := i + panicAtoi(acc[0])
+		i := util.Atoi(s)
+		sum := i + util.Atoi(acc[0])
 		return []string{strconv.Itoa(sum)}
 	}
 

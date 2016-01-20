@@ -3,8 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/habajca/simple-log-search/data"
 	"github.com/habajca/simple-log-search/generation"
+	"github.com/habajca/simple-log-search/util"
 	flag "github.com/ogier/pflag"
 	"os"
 	"strconv"
@@ -30,7 +30,7 @@ func init() {
 	flag.IntVarP(&timeFrame, "timeframe", "m", 3600, "The search space in the time dimension in seconds.")
 }
 
-type geoPoint data.GeoPoint
+type geoPoint util.GeoPoint
 
 const defaultGeoPointString = "37.7576171,-122.5776844"
 
@@ -158,7 +158,7 @@ func main() {
 			timeOrigin, timeFrame,
 			uidCount,
 			domainsFilename,
-			data.GeoPoint(geo), distance,
+			util.GeoPoint(geo), distance,
 		)
 		if err != nil {
 			fmt.Fprint(os.Stderr, err)

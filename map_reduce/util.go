@@ -40,8 +40,10 @@ func DoReduce(
 
 	// sort partitions
 	sortedKeys := make([]string, len(parts))
+	index := 0
 	for key := range parts {
-		sortedKeys = append(sortedKeys, key)
+		sortedKeys[index] = key
+		index = index + 1
 	}
 	sortStrings(sortedKeys, lessFunc)
 

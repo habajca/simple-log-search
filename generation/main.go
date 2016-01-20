@@ -3,7 +3,7 @@ package generation
 import (
 	"fmt"
 	"github.com/cheggaaa/pb"
-	"github.com/habajca/simple-log-search/data"
+	"github.com/habajca/simple-log-search/util"
 	"io/ioutil"
 	"time"
 )
@@ -14,7 +14,7 @@ func GenerateTestData(
 	timeOrigin int64, timeDistance int,
 	uidCount int,
 	domainsFilename string,
-	geoOrigin data.GeoPoint, geoDistance int,
+	geoOrigin util.GeoPoint, geoDistance int,
 ) (filenames []string, err error) {
 	domains, err := newDomains(domainsFilename)
 	if err != nil {
@@ -47,7 +47,7 @@ func generateTestDataFile(
 	timeOrigin int64, timeDistance int,
 	uidCount int,
 	domains domains,
-	geoOrigin data.GeoPoint, geoDistance int,
+	geoOrigin util.GeoPoint, geoDistance int,
 ) (filename string, err error) {
 	output := ""
 	for i := 0; i < rowCount; i++ {
@@ -57,10 +57,7 @@ func generateTestDataFile(
 			domains,
 			geoOrigin, geoDistance,
 		)
-		rowOutput, err := row.String()
-		if err != nil {
-			return "", err
-		}
+		rowOutput := util.StructToString(row)
 		output = output + rowOutput + "\n"
 	}
 	filename = generateFilename()
@@ -72,9 +69,9 @@ func generateTestDataRow(
 	timeOrigin int64, timeDistance int,
 	uidCount int,
 	domains domains,
-	geoOrigin data.GeoPoint, geoDistance int,
-) data.LogRow {
-	return data.LogRow{
+	geoOrigin util.GeoPoint, geoDistance int,
+) util.LogRow {
+	return util.LogRow{
 		Timestamp: randomTimestamp(timeOrigin, timeDistance),
 		Uid:       randomUid(uidCount),
 		Domain:    domains.random(),

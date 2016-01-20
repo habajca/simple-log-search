@@ -2,7 +2,7 @@ package generation
 
 import (
 	"fmt"
-	"github.com/habajca/simple-log-search/data"
+	"github.com/habajca/simple-log-search/util"
 	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"testing"
@@ -19,7 +19,7 @@ const TEST_DISTNACE_KM = float64(TEST_DISTANCE_M) / 1000
 func TestRandomGeo(t *testing.T) {
 	seed := time.Now().Unix()
 	rand.Seed(seed)
-	origin := data.GeoPoint{
+	origin := util.GeoPoint{
 		Latitude:  TEST_LATITUDE,
 		Longitude: TEST_LONGITUDE,
 	}

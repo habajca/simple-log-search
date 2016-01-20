@@ -1,7 +1,7 @@
 package generation
 
 import (
-	"github.com/habajca/simple-log-search/data"
+	"github.com/habajca/simple-log-search/util"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
@@ -15,7 +15,7 @@ func TestFileGeneration(t *testing.T) {
 		time.Now().Unix(), 3600,
 		1,
 		"testdata/domains.txt",
-		data.GeoPoint{
+		util.GeoPoint{
 			Latitude:  37.7576171,
 			Longitude: -122.5776844,
 		}, 5000,
