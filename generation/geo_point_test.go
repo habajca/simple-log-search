@@ -39,4 +39,10 @@ func TestRandomGeo(t *testing.T) {
 			t.FailNow()
 		}
 	}
+	assert.NotEqual(
+		t,
+		randomGeoPoint(origin, TEST_DISTANCE_M),
+		randomGeoPoint(origin, TEST_DISTANCE_M),
+		fmt.Sprintf("Two random points should not be the same. Seed: %d.", seed),
+	)
 }

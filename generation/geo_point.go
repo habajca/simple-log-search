@@ -7,8 +7,8 @@ import (
 
 func randomGeoPoint(origin util.GeoPoint, distance int) util.GeoPoint {
 	randDistance := rand.Float64() * float64(distance) / 1000
-	randBearing := rand.Float64()
+	randBearing := rand.Float64()*360 - 180
 	point := origin.Point()
-	point.PointAtDistanceAndBearing(randDistance, randBearing)
-	return util.NewGeoPoint(point)
+	newPoint := point.PointAtDistanceAndBearing(randDistance, randBearing)
+	return util.NewGeoPoint(newPoint)
 }
