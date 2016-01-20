@@ -3,7 +3,7 @@ A simple search of simple pixel server logs. Searches many simple pixel log file
 
 ## Build
 
-    go get
+    go get ./...
     go build
 
 ## Usage
