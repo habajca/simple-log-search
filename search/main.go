@@ -9,6 +9,8 @@ import (
 	"os"
 )
 
+// Note: This code was written to adhere to the map reduce paradigm. Some code may very well be written in an obtuse manor in order to adhere.
+
 func OutputSearchResults(
 	dirname string,
 	timeOrigin int64, timeDistance int,
