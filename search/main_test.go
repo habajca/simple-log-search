@@ -6,6 +6,25 @@ import (
 	"testing"
 )
 
+func TestSearchFile(t *testing.T) {
+	outputs, err := searchFilesInDirectory(
+		"testdata",
+		1453000000, 1000,
+		util.GeoPoint{Latitude: 37.7576171, Longitude: -122.5776844}, 5000,
+	)
+	if !assert.Nil(t, err) {
+		t.FailNow()
+	}
+
+	expected := []outputRow{
+		outputRow{
+			Domain: "test0.com",
+			Count:  1,
+		},
+	}
+	assert.Equal(t, expected, outputs)
+}
+
 func TestFilterRows(t *testing.T) {
 	rows := []string{`{"Timestamp":1453000000,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":37.7576171,"Longitude":-122.5776844}}`, `{"Timestamp":1453000000,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":0,"Longitude":0}}`, `{"Timestamp":0,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":37.7576171,"Longitude":-122.5776844}}`}
 

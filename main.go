@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/habajca/simple-log-search/generation"
+	"github.com/habajca/simple-log-search/search"
 	"github.com/habajca/simple-log-search/util"
 	flag "github.com/ogier/pflag"
 	"os"
@@ -116,7 +117,6 @@ func positive(i int64) bool {
 
 func valid() bool {
 	for _, i := range []int{fileCount, rowCount, timeFrame, uidCount, distance} {
-		fmt.Println(i)
 		if !positive(int64(i)) {
 			return false
 		}
@@ -147,7 +147,7 @@ func main() {
 	}
 	directory := os.Args[1]
 	if generateTestFiles {
-		if len(os.Args) < 3 {
+		if len(os.Args) < 4 {
 			flag.Usage()
 			os.Exit(1)
 		}
@@ -164,5 +164,15 @@ func main() {
 			fmt.Fprint(os.Stderr, err)
 			os.Exit(1)
 		}
+		return
+	}
+	err := search.OutputSearchResults(
+		directory,
+		timeOrigin, timeFrame,
+		util.GeoPoint(geo), distance,
+	)
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+		os.Exit(1)
 	}
 }

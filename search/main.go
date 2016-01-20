@@ -1,9 +1,78 @@
 package search
 
 import (
+	"bufio"
+	"fmt"
 	"github.com/habajca/simple-log-search/map_reduce"
 	"github.com/habajca/simple-log-search/util"
+	"io/ioutil"
+	"os"
 )
+
+func OutputSearchResults(
+	dirname string,
+	timeOrigin int64, timeDistance int,
+	geoOrigin util.GeoPoint, geoDistance int,
+) error {
+	outputs, err := searchFilesInDirectory(dirname, timeOrigin, timeDistance, geoOrigin, geoDistance)
+	if err != nil {
+		return err
+	}
+	for _, output := range outputs {
+		fmt.Printf("%s, %d\n", output.Domain, output.Count)
+	}
+	return nil
+}
+
+func searchFilesInDirectory(
+	dirname string,
+	timeOrigin int64, timeDistance int,
+	geoOrigin util.GeoPoint, geoDistance int,
+) ([]outputRow, error) {
+	fileInfos, err := ioutil.ReadDir(dirname)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Importing files...")
+	inputs := []string{}
+	for _, fileInfo := range fileInfos {
+		fileStrings, err := openFile(dirname + "/" + fileInfo.Name())
+		if err != nil {
+			return nil, err
+		}
+		inputs = append(inputs, fileStrings...)
+	}
+
+	fmt.Println("Filtering rows...")
+	filtered := filterRows(inputs, timeOrigin, timeDistance, geoOrigin, geoDistance)
+
+	fmt.Println("Reducing to counts per domain...")
+	unsortedOutput := reduceToOutput(filtered)
+
+	fmt.Println("Sorting output...")
+	sortedOutputStrings := sortOutputRows(unsortedOutput)
+	outputs := make([]outputRow, len(sortedOutputStrings))
+	for i, s := range sortedOutputStrings {
+		output := outputRow{}
+		util.StructFromString(s, &output)
+		outputs[i] = output
+	}
+	return outputs, nil
+}
+
+func openFile(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	strings := []string{}
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		strings = append(strings, scanner.Text())
+	}
+	return strings, scanner.Err()
+}
 
 func filterRows(
 	rows []string,
