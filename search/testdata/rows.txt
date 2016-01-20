@@ -1,0 +1,3 @@
+{"Timestamp":1453000000,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":37.7576171,"Longitude":-122.5776844}}
+{"Timestamp":1453000000,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":0,"Longitude":0}}
+{"Timestamp":0,"Uid":"78","Domain":"test0.com","Geo":{"Latitude":37.7576171,"Longitude":-122.5776844}}
